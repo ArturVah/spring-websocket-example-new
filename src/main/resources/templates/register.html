@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign up</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}"/>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<form method="post">
+    <h2>Sign Up</h2>
+    <p>
+        <label for="Email" class="floatLabel">Email</label>
+        <input id="Email" name="email" type="text"/>
+    </p>
+    <p>
+        <label for="firstName" class="floatLabel">First name</label>
+        <input id="firstName" name="firstName" type="text"/>
+    </p>
+    <p>
+        <label for="lastName" class="floatLabel">Last name</label>
+        <input id="lastName" name="lastName" type="text"/>
+    </p>
+    <p>
+        <label for="password" class="floatLabel">Password</label>
+        <input id="password" name="password" type="password"/>
+        <span>Enter a password longer than 8 characters</span>
+    </p>
+    <p>
+        <label for="confirm_password" class="floatLabel">Confirm Password</label>
+        <input id="confirm_password" name="confirm_password" type="password"/>
+        <span>Your passwords do not match</span>
+    </p>
+    <p>
+        <input type="submit" value="Create My Account" id="submit"/>
+    </p>
+    <p class="message">Already have an account? <a th:href="@{/login}">Sign in</a></p>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+</form>
+<script th:src="@{/js/register.js}"></script>
+</body>
+</html>
