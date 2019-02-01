@@ -35,16 +35,14 @@ public class ChatController {
                 .stream()
                 .map(p -> (User) p)
                 .filter(user -> !user.getUsername().equals(loggedInUser.getUsername()))
-                .forEach(user -> {
-                    simpMessagingTemplate.convertAndSendToUser(
-                            user.getUsername(),
-                            "/message",
-                            MessageFormat.format("{0}: {1}",
-                                    loggedInUser.getUsername(),
-                                    message
-                            )
-                    );
-                });
+                .forEach(user -> simpMessagingTemplate.convertAndSendToUser(
+                        user.getUsername(),
+                        "/message",
+                        MessageFormat.format("{0}: {1}",
+                                loggedInUser.getUsername(),
+                                message
+                        )
+                ));
 
         return ResponseEntity.ok().build();
     }
