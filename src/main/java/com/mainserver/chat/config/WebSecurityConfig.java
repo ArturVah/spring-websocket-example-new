@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -23,6 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+                .csrf().ignoringAntMatchers("/api/**")
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
@@ -32,7 +36,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login", "/register").permitAll()
                 .antMatchers("/").authenticated()
                 .and()
-                .authenticationProvider(daoAuthenticationProvider());
+                .authenticationProvider(daoAuthenticationProvider())
+                .sessionManagement().maximumSessions(1)
+                .sessionRegistry(sessionRegistry());
+    }
+
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
     }
 
     @Bean

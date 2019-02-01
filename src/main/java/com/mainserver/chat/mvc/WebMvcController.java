@@ -24,15 +24,13 @@ public class WebMvcController {
 
     @GetMapping("/")
     public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("valodik", "Hello valodik");
-        return modelAndView;
+        return new ModelAndView("index");
     }
 
     @GetMapping("/login")
     public String loginPage() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication instanceof AnonymousAuthenticationToken) {
+        if (authentication instanceof AnonymousAuthenticationToken) {
             return "login";
         }
         return "redirect:";

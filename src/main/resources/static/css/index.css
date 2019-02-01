@@ -1,0 +1,115 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: lightgrey;
+    margin: 0;
+    font: 16px/1.5em Helvetica Neue, Arial, sans-serif;
+    cursor: default;
+}
+
+/* UniNews styles */
+
+#un-chat {
+    position: relative;
+    max-width: 600px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #F0F0F0;
+    padding-bottom: 55px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+}
+
+#un-chat ul {
+    margin: 0;
+    padding: 5px 0 25px;
+    list-style: none;
+    height: 100%;
+    overflow: auto;
+}
+
+#un-chat li > div,
+#un-chat li.typing::before{
+    display: inline-block;
+    background-color: white;
+    max-width: 50%;
+    margin: 10px 15px 0 15px;
+    padding: 7px 13px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .168);
+}
+
+#un-chat li.me {
+    text-align: right;
+}
+
+#un-chat li:not(.me) > div,
+#un-chat li.typing::before {
+    border-top-left-radius: 2px;
+}
+
+#un-chat li.me > div {
+    color: white;
+    background-color: dimgrey;
+    border-bottom-right-radius: 2px;
+    text-align: left;
+}
+
+#un-chat li:not(.me) + li:not(.me) > div,
+#un-chat li.me + li.me > div {
+    margin-top: 4px;
+}
+
+#un-chat li.typing::before {
+    content: '...';
+    font-size: 24px;
+    line-height: 16px;
+    padding-top: 0;
+    padding-bottom: 15px;
+    color: black;
+    animation-name: typing;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+#un-chat form {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 10px;
+}
+
+#un-chat input {
+    width: 100%;
+    font-size: 20px;
+    padding: 5px 10px;
+    border: 1px solid lightgrey;
+    border-radius: 17px;
+}
+
+@keyframes typing {
+    0% {
+        color: black;
+    }
+
+    35% {
+        color: whitesmoke;
+    }
+
+    70% {
+        color: grey;
+    }
+
+    100% {
+        color: black;
+    }
+}
